@@ -1,4 +1,4 @@
-# AI Prompts & Techniques Collection
+# Prompt Generator & Techniques Collection
 
 This repository is a curated collection of prompts, strategies, and best practices for working (coding, researching) with various AI models, including Claude, GPTs, Gemini and others.
 
