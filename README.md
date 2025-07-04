@@ -1,6 +1,6 @@
 # Prompt Generator & Techniques Collection
 
-This repository is a curated collection of prompts, strategies, and best practices for working (coding, researching) with various AI models, including Claude, GPTs, Gemini and others.
+This repository is a curated collection of prompts, strategies, and best practices for working (coding, researching) with various AI models, including Claude, GPTs, Gemini and others. It can used in custom GPTs, Claude projects or Github Copilot Spaces to create awesome prompts.
 
 ## Overview
 
