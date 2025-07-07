@@ -29,7 +29,16 @@ Plan → Spec → build → Test → Deploy
 4. Commit and document
 
 ### Test-Driven Development Approach
-
+1. Quality and accuracy are top priorities
+2. This is for a production application in a real environment
+3. No mistakes are tolerated
+4. AI should be very focused, think hard while coding
+5. Ask for clarification if having doubts
+6. Don't assume anything that's not clear
+7. No rush - quality over speed
+8. Plan, understand context, and document all progress with details
+9. Always create a detailed PRD before making code changes
+   ---
 1. **Test-driven development**: write tests based on expected input/output pairs
 2. **Run the tests** and confirm they fail. Explicitly telling it not to write any implementation code at this stage is often helpful
 3. **Commit the tests**  
