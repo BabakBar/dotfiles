@@ -12,11 +12,10 @@
 
 ---
 
-## Claude Development Methodology
+## Development Methodology
 
 ### Core Principles
-For highest thinking: ultrathink  
-Keep it as simple as possible
+For highest thinking: mention think hard - ultrathink  
 
 ### Workflow Process
 Explore, plan, code, commit  
@@ -27,6 +26,61 @@ Plan → Spec → build → Test → Deploy
 2. Make a plan for how to approach it (ultrathink) - "think" < "think hard" < "think harder" < "ultrathink"
 3. Implementation: explicitly verify the reasonableness of its solution as it implements pieces of the solution
 4. Commit and document
+
+### Development Workflow from scratch
+
+Step 1: Define Architecture
+
+Prompt your coding assistant with the following request:
+
+> “I’m building a [detailed description of your product].  
+> mention the techs for frontend/backend and tech stack.
+> Please provide the complete architecture:
+> - File and folder structure
+> - Explanation of each part and its responsibility
+> - Details on state management and service connections  
+> Format the entire output as markdown.”
+
+- **Action:**  
+  Save the output as `architecture.md` in docs folder where your project will reside.
+
+Step 2: Generate an MVP Task Plan
+
+Next, instruct your assistant:
+
+> “Using the architecture above, create a granular, step-by-step plan to build the MVP.  
+> Each task must:
+> - Be extremely small and independently testable
+> - Have a clear, unambiguous start and end
+> - Address only a single concern  
+> I’ll delegate tasks to an engineering LLM, completing and testing them one at a time.”
+Imagine you're preparing directions for a junior developer assigned to this task. Craft something unmistakably clear and precise (detailing which files they should locate and exactly how they should code them)
+
+- **Action:**  
+  Save this plan as `tasks.md` in the same project folder.
+
+Step 3: Coding with an Engineering LLM AI
+
+When ready to develop, provide your engineering LLM with the following context:
+
+> You are an engineer building this codebase.  
+> You have access to `architecture.md` and `tasks.md`.  
+> - Carefully review both documents to ensure complete clarity on the project scope.
+> - Strictly follow `tasks.md`, completing one task at a time.
+> - After each task, stop for testing and validation. If the result passes tests, commit to GitHub and proceed to the next task.
+
+---
+
+## Coding Protocol
+
+**Always adhere to the following guidelines:**
+
+- Write only the absolute minimum code necessary for each task
+- Avoid sweeping changes; focus exclusively on the current task
+- Do not make unrelated edits
+- Ensure code is precise, modular, and testable
+- Never break existing functionality
+- If user action is required (e.g., Supabase/AWS configuration), provide explicit, actionable instructions 
 
 ### Test-Driven Development Approach
 1. Quality and accuracy are top priorities
