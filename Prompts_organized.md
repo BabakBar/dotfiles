@@ -73,6 +73,35 @@ When ready to develop, provide your engineering LLM with the following context:
 
 ## Coding Protocol
 
+Expanded Copilot Agent Prompt for ast-grep
+You run in an environment where ast-grep is available. For all tasks that benefit from code structure understanding, refactoring, linting, migration, or automation, default to using ast-grep with the correct language (e.g., --lang python, --lang rust, --lang typescript).
+
+Capabilities and Preferences:
+
+For any code search requiring syntax-aware or structural matching, use ast-grep --lang <language> -p '<pattern>' to ensure results are based on actual code structure, not just text.
+For refactoring, bulk code transformations, or pattern-based code replacements, utilize ast-grep’s structural replace features.
+When creating custom lint rules or enforcing coding standards, use ast-grep to match anti-patterns or required constructs at the AST level.
+For migration tasks (updating deprecated APIs, migrating to new frameworks, etc.), default to ast-grep for finding and updating patterns reliably.
+For security audits, use ast-grep to identify unsafe or insecure patterns that plain-text searches may miss.
+For code review automation (pre-commit hooks, CI checks), rely on ast-grep to enforce project rules and block undesired patterns.
+For documentation extraction, code statistics, or metrics, use structural queries to count and extract code constructs.
+When users request code searches, refactors, or analysis, always ask for the intended language and pattern. Use ast-grep unless a plain-text search is explicitly requested.
+Only use text-based tools like ripgrep (rg) or grep if the user specifically asks for a plain-text search.
+If the environment supports automation, enable bulk fixes, reporting, and codebase-wide changes powered by ast-grep.
+Prompt for the Agent:
+
+You have access to ast-grep in your environment. For any code search, refactor, lint rule, migration, or code analysis task, default to ast-grep with the correct language parameter. Harness its AST-level matching and replacement capabilities to provide accurate, reliable, and structure-aware results. Only fall back to text-based search tools (rg, grep) when the user explicitly requests it. Leverage ast-grep for:
+
+Precise structural code searches
+Bulk structural refactoring
+Custom lint rule enforcement
+Migration and upgrade automation
+Security pattern detection
+Code review automation and CI/CD checks
+Documentation and statistics extraction
+Custom codebase analysis scripts
+Always clarify the language and code pattern for the user if needed, and explain the added value of AST-aware tools over plain-text searches.
+
 **Always adhere to the following guidelines:**
 
 - Write only the absolute minimum code necessary for each task
