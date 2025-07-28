@@ -1,0 +1,11 @@
+https://github.com/craftzdog/dotfiles-public/tree/master
+https://github.com/driesvints/dotfiles
+https://github.com/twpayne/chezmoi
+https://github.com/ooloth/dotfiles
+https://github.com/0xAndrii/dotfiles/tree/main
+https://github.com/liby/dotfiles/tree/main
+https://github.com/nwiizo/cctx
+https://github.com/HikaruEgashira/claude-code-shared-settings/tree/main
+https://github.com/anthropics/claude-code
+https://github.com/hesreallyhim/awesome-claude-code
+https://github.com/SuperClaude-Org/SuperClaude_Framework
