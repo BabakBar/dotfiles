@@ -71,6 +71,11 @@ When ready to develop, provide your engineering LLM with the following context:
 
 ---
 
+## sources: 
+use this link to find suitable prompts: 
+1- https://github.com/scragz/kornelius
+2- https://github.com/github/awesome-copilot
+
 ## Coding Protocol
 
 Expanded Copilot Agent Prompt for ast-grep
@@ -967,6 +972,1259 @@ Essential elements:
 - Never start with the small models in your system. Use the big guns, then once you understand where they are good/bad at, you can distill into smaller ones (or fine tune!)
 - I do not recommend using smaller models for complex reasoning tasks - they're much better at narrow, scoped down things
 - Don't write hand prompts, instead go to Claude and explain what you're trying to do, and have it write a better prompt + examples
+
+## Examples
+
+1- Request: 
+# Idea Refinement
+
+Your task is to **collaborate on developing or refining a project or feature concept**. This prompt solicits iterative feedback to expand a basic idea into a comprehensive, well-structured request.
+
+---
+
+## **Required Inputs**
+
+1. **PROJECT_REQUEST**: A short description of the project or feature’s initial concept.
+
+---
+
+## **Task Overview**
+
+In each exchange, the AI will:
+
+1. Ask questions to clarify the project or feature.
+2. Suggest missing considerations or user flows.
+3. Organize requirements logically.
+4. Present the updated project request in a well-defined Markdown specification.
+
+This ensures you iterate toward a final, clear “Project Request” doc.
+
+---
+
+## **Detailed Process Outline**
+
+1. **User Provides Concept**: User supplies the idea.
+2. **AI Gathers Clarifications**: The AI asks targeted questions to flesh out missing details, such as feature scope or user needs.
+3. **AI Updates the Specification**: After each round of questions/answers, the AI returns a new version of the Markdown-based request format.
+4. **Repeat** until the request is complete, well-defined, and you are satisfied.
+
+---
+
+## **Output Template**
+
+```markdown
+# Project Name
+
+[Description goes here]
+
+## Target Audience
+
+[Who will use this? What are their needs?]
+
+## Desired Features
+
+### [Feature Category]
+
+- [ ] [High-level requirement]
+  - [ ] [Further detail, sub-requirement]
+
+## Design Requests
+
+- [ ] [Visual or UX requirement]
+  - [ ] [Relevant detail or constraint]
+
+## Other Notes
+
+- [Any additional considerations or open questions]
+```
+
+---
+
+## **Context**
+
+<project_request>
+{{PROJECT_REQUEST}}
+</project_request>
+
+---
+
+2- Spec
+# Technical Specification Generation
+
+Your task is to **generate a comprehensive technical specification**. The specification must be precise, thorough, and suitable for planning & code generation.
+
+---
+
+## **Required Inputs**
+
+1. **REQUEST**: The project or feature request in `<project_request>`.
+
+---
+
+## **Optional Inputs**
+
+1. **RULES**: The guidelines or best practices in `<project_rules>`, if any.
+2. **REFERENCE**: A starter template or reference design in `<reference_code>`.
+
+---
+
+## **Task Overview**
+
+1. Analyze all inputs and plan an approach inside `<specification_planning>` tags.
+2. Cover architecture, feature breakdowns, data flows, and any relevant integration points.
+3. Return a final specification in Markdown following the template (see “Output Templates” below)
+
+---
+
+## **Detailed Process Outline**
+
+1. **Review Inputs**
+   - The AI reviews `<project_request>`, `<project_rules>`, and `<reference_code>`.
+
+2. **Planning**
+   - Within `<specification_planning>` tags, the AI identifies key workflows, project structure, data flows, etc.
+   - Pinpoints challenges and clarifies requirements.
+
+3. **Specification Output**
+   - The AI creates a detailed specification using the output template.
+   - The specification must cover:
+      1. Planning & Discovery
+      2. System Architecture & Technology
+      3. Database & Server Logic
+      4. Feature Specifications
+      5. Design System
+      6. Security & Compliance
+      7. Optional Integrations
+      8. Environment Configuration & Deployment
+      9. Testing & Quality Assurance
+      10. Edge Cases, Implementation Considerations & Reflection
+      11. Summary & Next Steps
+
+
+4. **Further Iteration**
+   - The user can request additional details, modifications, or clarifications as needed.
+
+---
+
+## **Guidelines**
+
+- Ensure that your specification is **extremely detailed**, giving **implementation guidance** and examples for complex features.
+- Clearly define interfaces and data contracts.
+- Summarize your final specification at the end, noting any open questions.
+- The user may keep refining the request until it's complete and ready.
+
+---
+
+## **Output Templates**
+
+Use the output template below.
+
+---
+
+### **Template: Project Specification**
+
+```markdown
+# {Project Name} Project Specification
+
+---
+
+## 1. Planning & Discovery
+
+### 1.1 Core Purpose & Success
+
+* **Mission Statement**: One-sentence purpose of the website.
+* **Core Purpose & Goals**: High-level product vision—why it exists.
+* **Success Indicators**: Metrics or signals that prove goals are met.
+* **Experience Qualities**: Three adjectives that should define the UX.
+
+### 1.2 Project Classification & Approach
+
+* **Complexity Level**: Micro Tool, Content Showcase, Light App, or Complex App.
+* **Primary User Activity**: Consuming, Acting, Creating, or Interacting.
+* **Primary Use Cases**: Key user workflows and expected outcomes.
+
+### 1.3 Feature-Selection Rationale
+
+* **Core Problem Analysis**: The specific pain we solve.
+* **User Context**: When, where, and how users engage.
+* **Critical Path**: Smallest journey from entry to goal completion.
+* **Key Moments**: Two-to-three pivotal interactions that define success.
+
+### 1.4 High-Level Architecture Overview
+
+* **System Diagram / Textual Map**: Client, server, database, third-party services.
+
+### 1.5 Essential Features *(repeat per core feature)*
+
+* **Feature Functionality**: What it does.
+* **Feature Purpose**: Why it matters.
+* **Feature Validation**: How we confirm it works.
+
+---
+
+## 2. System Architecture & Technology
+
+### 2.1 Tech Stack
+
+* **Languages & Frameworks**: e.g., TypeScript, React, Node.js.
+* **Libraries & Dependencies**: e.g., Express, Redux, Tailwind.
+* **Database & ORM**: e.g., PostgreSQL, Prisma.
+* **DevOps & Hosting**: e.g., Docker, AWS, Heroku.
+* **CI/CD Pipeline**: e.g., GitHub Actions, CircleCI.
+
+### 2.2 Project Structure
+
+* **Folder Organization**: Proposed layout (`/src`, `/server`, `/client`, etc.).
+* **Naming Conventions**: File and directory patterns.
+* **Key Modules**: Auth, payment, notifications, and other major domains.
+
+### 2.3 Component Architecture
+
+#### Server / Backend
+
+* **Framework**: Express, NestJS, etc.
+* **Data Models & Domain Objects**: Classes representing entities.
+* **Error Boundaries**: Global error-handling strategy.
+
+#### Client / Frontend
+
+* **State Management**: Redux, Vuex, Zustand, etc.
+* **Routing**: Public vs. protected, lazy loading strategies.
+* **Type Definitions**: Interfaces and types if using TypeScript or Flow.
+
+### 2.4 Data Flow & Real-Time
+
+* **Request/Response Lifecycle**: How client talks to server.
+* **State Sync**: UI update strategies on data change.
+* **Real-Time Updates**: WebSockets, server-sent events, or push notifications.
+
+---
+
+## 3. Database & Server Logic
+
+### 3.1 Database Schema
+
+* **Entities**: Table/collection names, fields, data types, constraints.
+* **Relationships**: One-to-many, many-to-many, indexes.
+* **Migrations**: Strategy for evolving the schema safely.
+
+### 3.2 Server Actions
+
+#### Database Actions
+
+* **CRUD Operations**: Create, read, update, delete summaries.
+* **Endpoints / GraphQL Queries**: How data is fetched or mutated.
+* **ORM/Query Examples**: Representative snippets.
+
+#### Other Backend Logic
+
+* **External API Integrations**: Payments, third-party data, auth providers.
+* **File / Media Handling**: Uploads, transformations, storage rules.
+* **Background Jobs / Workers**: Scheduled tasks and async processing.
+
+---
+
+## 4. Feature Specifications *(repeat per major feature)*
+
+* **User Story & Requirements**: What the user needs to do and why.
+* **Implementation Details**: Step-by-step outline.
+* **Edge Cases & Error Handling**: Anticipated failures and fallbacks.
+* **UI/UX Considerations**: Wireframes, design-mock links, accessibility notes.
+
+---
+
+## 5. Design System
+
+### 5.1 Visual Tone & Identity
+
+* **Branding & Theme**: Core colors, fonts, icons.
+* **Emotional Response**: Feelings the design should evoke.
+* **Design Personality**: Playful, serious, elegant, rugged, cutting-edge, or classic.
+* **Visual Metaphors**: Imagery or concepts reflecting the purpose.
+* **Simplicity Spectrum**: Minimal vs. rich interface—choose what serves the goal.
+
+### 5.2 Color Strategy
+
+* **Color Scheme Type**: Monochromatic, Analogous, Complementary, Triadic, or Custom.
+* **Primary Color**: Main brand color and what it communicates.
+* **Secondary Colors**: Supporting hues and their purposes.
+* **Accent Color**: Attention-grabbing highlights for CTAs and key elements.
+* **Color Psychology**: How chosen colors influence perception and behavior.
+* **Color Accessibility**: Contrast and color-blind-friendly combinations.
+* **Foreground/Background Pairings**: WCAG AA-checked text colors.
+
+### 5.3 Typography System
+
+* **Font Pairing Strategy**: Harmony between heading and body fonts.
+* **Typographic Hierarchy**: Size, weight, spacing rules.
+* **Font Personality**: Characteristics conveyed by typefaces.
+* **Readability Focus**: Optimal line length, spacing, sizing.
+* **Typography Consistency**: Rules for cohesive treatment.
+* **Which Fonts**: Google Fonts (or other) to be used.
+* **Legibility Check**: Verification that fonts remain readable.
+
+### 5.4 Visual Hierarchy & Layout
+
+* **Attention Direction**: How design guides the eye.
+* **White Space Philosophy**: Negative space for rhythm and focus.
+* **Grid System**: Structural alignment framework.
+* **Responsive Approach**: Adaptation across devices and breakpoints.
+* **Content Density**: Balancing richness with clarity.
+* **Layout & Spacing**: Grid definitions and spacing scales.
+
+### 5.5 Animations
+
+* **Purposeful Meaning**: Motion that communicates brand and guides attention.
+* **Hierarchy of Movement**: Which elements deserve animation focus.
+* **Contextual Appropriateness**: Balancing subtle utility and delight.
+
+### 5.6 UI Elements & Components
+
+* **Common Elements**: Buttons, forms, modals.
+* **Component Usage**: Dialogs, cards, lists, etc.
+* **Component Customization**: Tailwind tweaks for brand alignment.
+* **Component States**: Hover, focus, disabled, error.
+* **Interaction States**: Visual feedback conventions.
+* **Reusable Patterns**: Notifications, lists, pagination.
+* **Icon Selection**: Icons representing actions or concepts.
+* **Component Hierarchy**: Primary, secondary, tertiary treatments.
+* **Spacing System**: Consistent padding/margins via Tailwind scale.
+* **Mobile Adaptation**: How components reflow on small screens.
+
+### 5.7 Visual Consistency Framework
+
+* **Design System Approach**: Component-based vs. page-based.
+* **Style-Guide Elements**: Decisions to document for future devs.
+* **Visual Rhythm**: Predictable interface patterns.
+* **Brand Alignment**: Ways visuals reinforce identity.
+
+### 5.8 Accessibility & Readability
+
+* **Accessibility Considerations**: WCAG guidelines, ARIA attributes.
+* **Contrast Goal**: WCAG AA minimum for all text and meaningful graphics.
+
+---
+
+## 6. Security & Compliance
+
+* **Encryption**: Data-at-rest and data-in-transit.
+* **Compliance**: GDPR, HIPAA, PCI, or other relevant regulations.
+* **Threat Modeling**: Potential vulnerabilities and mitigations.
+* **Secrets Management**: Secure handling of API keys and credentials.
+
+---
+
+## 7. Optional Integrations
+
+### 7.1 Payment Integration
+
+* **Supported Providers**: Stripe, PayPal, etc.
+* **Checkout Flow**: Steps from cart to confirmation.
+* **Webhook Handling**: Events for refunds, disputes, etc.
+
+### 7.2 Analytics Integration
+
+* **Tracking Tools**: Google Analytics, Mixpanel, custom.
+* **Event Naming Conventions**: e.g., `user_sign_up`, `purchase_completed`.
+* **Reporting & Dashboards**: Where and how metrics are displayed.
+
+---
+
+## 8. Environment Configuration & Deployment
+
+* **Local Setup**: ENV vars, Docker usage, build scripts.
+* **Staging / Production Environments**: Differences and scaling approach.
+* **CI/CD**: Build, test, deploy pipeline and versioning.
+* **Monitoring & Logging**: Sentry, Datadog, log format and retention.
+
+---
+
+## 9. Testing & Quality Assurance
+
+* **Unit Testing**: Jest, Mocha, coverage goals.
+* **Integration Testing**: API and DB tests.
+* **End-to-End Testing**: Cypress, Playwright, full-flow scenarios.
+* **Performance & Security Testing**: Load tests and automated scans.
+* **Accessibility Tests**: axe-playwright or pa11y integration.
+
+---
+
+## 10. Edge Cases, Implementation Considerations & Reflection
+
+* **Potential Obstacles**: Factors that might block user success.
+* **Edge-Case Handling**: Strategies for unexpected behavior.
+* **Technical Constraints**: Known limitations to consider.
+* **Scalability Needs**: How the solution may grow over time.
+* **Testing Focus**: Assumptions requiring validation.
+* **Critical Questions**: Unknowns that could affect success.
+* **Approach Suitability**: Why this approach fits the need.
+* **Assumptions to Challenge**: Items that must be proved.
+* **Exceptional Solution Definition**: What would make the outcome outstanding.
+
+---
+
+## 11. Summary & Next Steps
+
+* **Recap**: Key design and architecture decisions.
+* **Open Questions**: Unresolved dependencies or constraints.
+* **Future Enhancements**: Ideas for iteration or expansion.
+
+---
+```
+
+---
+
+## **Context**
+
+<project_request>
+{{PROJECT_REQUEST}}
+</project_request>
+
+<project_rules>
+{{PROJECT_RULES}}
+</project_rules>
+
+<reference_code>
+{{REFERENCE_CODE}}
+</reference_code>
+
+---
+3- Planner
+# Implementation Plan Generation
+
+Your task is to **create a comprehensive, step-by-step implementation plan** for building a fully functional web application based on provided input documents. The plan should be detailed enough for a code-generation AI to execute each step sequentially.
+
+---
+
+## **Required Inputs**
+
+1. **PROJECT_REQUEST**: An overview of the project requirements or user request.
+2. **PROJECT_RULES**: Any specific rules, guidelines, or best practices to follow.
+3. **TECHNICAL_SPECIFICATION**: A thorough technical spec outlining architecture, data flows, features, etc.
+4. **REFERENCE_CODE**: Any initial code or directory structure templates that should be referenced or expanded.
+
+---
+
+## **Task Overview**
+
+In each exchange, you will:
+
+1. **Analyze** the provided inputs to understand the scope and requirements of the project.
+2. **Brainstorm** (within `<brainstorming>` tags) the logical approach to development, considering project structure, database schema, API routes, shared components, authentication, etc.
+3. **Construct** an itemized, ordered list of implementation steps, each sufficiently granular and self-contained.
+4. **Format** these steps as a Markdown-based plan, ensuring it follows the guidelines:
+   - Each step modifies no more than ~20 files.
+   - The plan is structured so the AI can tackle one step at a time (sequentially).
+   - Each step clearly outlines its dependencies, tasks, and any user instructions (like installing a library or updating config on a remote service).
+
+Upon completion, the AI will produce a final **Implementation Plan**—a single document containing your project build steps in order. This plan should cover everything from **initial project setup** to **final testing**.
+
+---
+
+## **Detailed Process Outline**
+
+1. **Review Inputs**: The AI reads `<project_request>`, `<project_rules>`, `<technical_specification>`, and `<reference_code>` to form a complete understanding of the project.
+2. **Brainstorm**: Within `<brainstorming>` tags, the AI considers:
+   - Core structure and essential configurations.
+   - Database schema, server actions, and API routes.
+   - Shared components, layouts, and feature pages.
+   - Authentication, authorization, and third-party service integrations.
+   - Client-side interactivity and state management.
+   - Testing strategy and error handling.
+3. **Create the Step-by-Step Plan**:
+   - **List** each step with a short title and description.
+   - **Specify** affected files (ensuring no more than 20 changes in a single step).
+   - **Indicate** step dependencies (if any).
+   - **Highlight** any user instructions for manual tasks.
+4. **Finalize the Plan**: The AI returns the complete plan under a `# Implementation Plan` heading, with each major section labeled (e.g., “## [Section Name]”) and the sub-steps in a checklist format.
+
+---
+
+## **Output Template**
+
+Below is an example of the **Implementation Plan** structure you should produce once the brainstorming is complete:
+
+```markdown
+# Implementation Plan
+
+## [Section Name]
+- [ ] Step 1: [Brief title]
+  - **Task**: [Detailed explanation of what needs to be implemented]
+  - **Files**: [Up to 20 files, ideally less]
+    - `path/to/file1.ts`: [Description of changes]
+    - ...
+  - **Step Dependencies**: [e.g., "None" or "Step 2"]
+  - **User Instructions**: [Any manual tasks the user must perform]
+
+[Additional steps... up to final deployment and testing]
+```
+
+After listing all steps, provide a **brief summary** of your overall approach and key considerations (e.g., major dependencies, potential complexities, or recommended best practices).
+
+---
+
+## **Context**
+
+<technical_specification>
+{{TECHNICAL_SPECIFICATION}}
+</technical_specification>
+
+<project_request>
+{{PROJECT_REQUEST}}
+</project_request>
+
+<project_rules>
+{{PROJECT_RULES}}
+</project_rules>
+
+<reference_code>
+{{REFERENCE_CODE}}
+</reference_code>
+
+---
+4- Codegen
+# Code Generation
+
+Your task is to **serve as an AI code generator** responsible for systematically implementing a web application, one step at a time, based on a provided **technical specification** and **implementation plan**.
+
+You will:
+
+1. Identify which step in the plan is next.
+2. Write or modify the code files necessary for that specific step.
+3. Provide the **complete** contents of each file, following strict documentation and formatting rules.
+
+---
+
+## **Required Inputs**
+
+1. **IMPLEMENTATION_PLAN**
+   - A step-by-step plan (checklist) for building the application, indicating completed and remaining tasks.
+2. **TECHNICAL_SPECIFICATION**
+   - A detailed technical spec containing system architecture, features, and design guidelines.
+3. **PROJECT_REQUEST**
+   - A description of the project objectives or requirements.
+
+---
+
+## **Optional Inputs**
+
+1. **PROJECT_RULES**
+   - Any constraints, conventions, or “rules” you must follow.
+2. **EXISTING_CODE**
+   - Any existing codebase or partial implementation.
+
+---
+
+## **Task Overview**
+
+When this prompt runs, you will:
+
+1. **Review** the provided inputs (Project Request, Rules, Spec, Plan, Code).
+2. **Identify** the next incomplete step in the **IMPLEMENTATION_PLAN** (marked `- [ ]`).
+3. **Generate** all the code required to fulfill that step.
+   - Each **modified or created file** must be shown in **full**, wrapped in a code block.
+   - Precede each file with “Here’s what I did and why:” to explain your changes.
+   - Use the design guidelines in the appendix wh
+4. **Apply** thorough documentation:
+   - File-level doc comments describing purpose and scope.
+   - Function-level doc comments detailing inputs, outputs, and logic flow.
+   - Inline comments explaining complex logic or edge cases.
+   - Type definitions and error handling as needed.
+5. **End** with:
+   - **“STEP X COMPLETE. Here’s what I did and why:”** summarizing changes globally.
+   - **“USER INSTRUCTIONS:”** specifying any manual tasks (e.g., installing libraries).
+   - If you **update** the plan, return the modified steps in a **code block**.
+
+Throughout, maintain compliance with **PROJECT_RULES** and align with the **TECHNICAL_SPECIFICATION**.
+
+---
+
+## **Detailed Process Outline**
+
+1. **Read All Inputs**
+   - Confirm you have the full `project_request`, `project_rules`, `technical_specification`, `implementation_plan`, and `existing_code`.
+2. **Find Next Step**
+   - Look for the next bullet in the `implementation_plan` marked `- [ ]`.
+3. **Generate/Update Files**
+   - For each file required, create or update it with comprehensive code and documentation.
+   - Limit yourself to changing **no more than 20 files** per step to keep changes manageable.
+4. **Document Thoroughly**
+   - Provide an explanation (“Here’s what I did and why”) before each file.
+   - Output complete file contents in a Markdown code block.
+5. **Finalize**
+   - End with “STEP X COMPLETE” summary.
+   - Provide any **USER INSTRUCTIONS** for manual tasks.
+   - If you adjust the plan, include the updated steps in a Markdown code block.
+
+---
+
+## **Output Template**
+
+Below is an example of how your output should look once you **implement** the next step:
+
+```markdown
+STEP X COMPLETE. Here's what I did and why:
+
+- [Summarize the changes made across all files.]
+- [Note any crucial details or known issues.]
+
+USER INSTRUCTIONS: Please do the following:
+
+1. [Manual task #1, e.g., install library or environment variable config]
+2. [Manual task #2, e.g., run migration or set up .env file]
+```
+
+If you updated the implementation plan, record it here:
+
+```markdown
+# Updated Implementation Plan
+
+## [Section Name]
+
+- [x] Step 1: [Completed or updated step with notes]
+- [ ] Step 2: [Still pending]
+```
+
+---
+
+{{APPENDICES}}
+
+---
+
+## **Context**
+
+<implementation_plan>
+{{IMPLEMENTATION_PLAN}}
+</implementation_plan>
+
+<technical_specification>
+{{TECHNICAL_SPECIFICATION}}
+</technical_specification>
+
+<project_request>
+{{PROJECT_REQUEST}}
+</project_request>
+
+<project_rules>
+{{PROJECT_RULES}}
+</project_rules>
+
+<existing_code>
+{{EXISTING_CODE}}
+</existing_code>
+
+---
+
+5- Review
+# Code Review
+
+Your task is to **serve as an expert code reviewer and optimizer**, analyzing the existing code against the original plan and requirements. Then you will produce a new **optimization plan** that outlines improvements to the current implementation.
+
+---
+
+## **Required Inputs**
+
+1. **IMPLEMENTATION_PLAN**
+   - The plan used for building the current code.
+2. **TECHNICAL_SPECIFICATION**
+   - The detailed technical specification that informed the initial implementation.
+3. **PROJECT_REQUEST**
+   - The original description of project objectives or requirements.
+4. **PROJECT_RULES**
+   - Any constraints, guidelines, or “rules” you must follow.
+5. **EXISTING_CODE**
+   - The code that was implemented following the original plan.
+
+---
+
+## **Task Overview**
+
+1. **Analyze** the existing code base in the context of the original plan, looking for discrepancies, potential improvements, or missed requirements.
+2. **Focus** on key areas:
+   - Code organization and structure
+   - Code quality and best practices
+   - UI/UX improvements
+3. **Wrap** this analysis in `<analysis>` tags to capture your insights.
+4. **Produce** a new “Optimization Plan” in Markdown, detailing step-by-step improvements with minimal file changes per step.
+
+Your plan should be clear enough that another AI can implement each step sequentially in a single iteration.
+
+---
+
+## **Detailed Process Outline**
+
+1. **Review Inputs**
+   - Ingest `<project_request>`, `<project_rules>`, `<technical_specification>`, `<implementation_plan>`, and `<existing_code>`.
+2. **Perform Analysis**
+   - Within `<analysis>` tags, comment on:
+     1. **Code Organization & Structure**: Folder layout, separation of concerns, composition.
+     2. **Code Quality & Best Practices**: TypeScript usage, naming conventions, error handling, etc.
+     3. **UI/UX**: Accessibility, responsiveness, design consistency, error message handling.
+3. **Generate Optimization Plan**
+   - Use markdown formating with the output template.
+   - Include each improvement as a small, **atomic** step with **no more than 20 file modifications**.
+   - Steps should **maintain existing functionality** and follow the **Project Rules** and **Technical Specification**.
+4. **Provide Guidance**
+   - Ensure your plan states any **success criteria** or acceptance conditions for each step.
+   - End your plan with a **logical next step** if needed.
+
+---
+
+## **Output Template**
+
+Below is an example of how your final output should look once you generate your analysis and plan:
+
+```markdown
+<analysis>
+Here is my detailed review of the current codebase:
+1. Code Organization: Observations, suggestions...
+2. Code Quality: Observations, improvements...
+3. UI/UX: Observations, improvements...
+</analysis>
+
+# Optimization Plan
+
+## Code Structure & Organization
+- [ ] Step 1: [Brief title]
+  - **Task**: [Explanation]
+  - **Files**:
+    - `path/to/file1.ts`: [Description of changes]
+    - ...
+  - **Step Dependencies**: [None or references]
+  - **User Instructions**: [Manual steps if any]
+
+[Additional categories and steps...]
+```
+
+---
+
+## **Context**
+
+<implementation_plan>
+ {{IMPLEMENTATION_PLAN}}
+</implementation_plan>
+
+<technical_specification>
+{{TECHNICAL_SPECIFICATION}}
+</technical_specification>
+
+<project_request>
+{{PROJECT_REQUEST}}
+</project_request>
+
+<project_rules>
+{{PROJECT_RULES}}
+</project_rules>
+
+<existing_code>
+{{EXISTING_CODE}}
+</existing_code>
+
+---
+
+### Debugging Mode
+7- Observe
+# Debugging Mode – Step 1: Observe
+
+## Instructions
+
+You are the in the **Observe** phase of OODA for debugging. 
+
+1. **Parse the User Inputs**  
+   - Use the inputs to understand the bug and context.
+
+2. **Summarize Key Observations**  
+   - Provide a brief overview of the user’s data—no large verbatim quotes.
+
+3. **Highlight Immediate Observations**  
+   - Note any patterns, inconsistencies, or missing information.
+
+4. **Ask Clarifying Questions**  
+   - Point out any data you still need or uncertainties in the user’s input.
+   - Keep it concise.
+
+---
+
+## Output Template
+
+```markdown
+# Debugging Mode – Step 1: Observe
+
+## Summary
+- [Short summary of the main points derived from the user’s data]
+
+## Immediate Observations
+- [List any patterns, unusual findings, or contradictions noticed by the AI]
+
+## Clarifying Questions
+1. [If needed, “Do you have server logs from the same time frame?”]
+2. [Any other missing or needed information]
+
+> **Note to User**: Provide answers or additional context if any clarifications are requested. Once you’re satisfied with the observed data, proceed to **Step 2: Orient**.
+```
+
+---
+
+## Context
+
+<bug_description>
+{{BUG_DESCRIPTION}}
+</bug_description>
+
+<error_messages>
+{{ERROR_MESSAGES}}
+</error_messages>
+
+<repro_steps>
+{{REPRO_STEPS}}
+</repro_steps>
+
+<env_details>
+{{ENV_DETAILS}}
+</env_details>
+
+<user_feedback>
+{{USER_FEEDBACK}}
+</user_feedback>
+
+<additional_evidence>
+{{ADDITIONAL_EVIDENCE}}
+</additional_evidence>
+
+8- Orient
+# Debugging Mode – Step 2: Orient
+
+## Instructions
+
+You are now in the **Orient** phase of OODA for debugging. The user may have updated information based on Step 1 clarifications. Your task is to:
+
+1. **Parse Updated Context**  
+   - Review the summary and clarifications from Step 1.
+   - Integrate this new info with the originally observed data.
+
+2. **Analyze & Interpret**  
+   - Identify potential root causes, suspicious patterns, or areas requiring deeper investigation.
+   - Organize this into concise hypotheses or theories—without definitively concluding.
+
+3. **Avoid Solutions**  
+   - Do not offer direct fixes or next actions yet; Step 3 (“Decide”) will handle solution choices.
+
+4. **Generate Output**  
+   - Use the “Output Template (User-Facing)” below.
+   - Include a short summary of your analysis, plausible hypotheses, and any additional questions that might guide further refinement.
+
+---
+
+## Output Template
+
+```markdown
+# Debugging Mode – Step 2: Orient
+
+## Summary of Observations
+- [Condensed restatement of the key facts from Step 1, plus any new clarifications]
+
+## Potential Causes or Theories
+- [List 1–3 possible root causes or patterns, referencing any suspicious logs, environment quirks, or repeated user complaints]
+
+## Clarifying Questions
+1. [E.g., “Do logs show any correlation between high CPU usage and the error timestamps?”]
+2. [Any other question about missing or ambiguous data]
+
+> **Note to User**: This step focuses on forming hypotheses. We are not deciding on any specific fix yet. Once you’re satisfied with these potential causes, proceed to **Step 3: Decide**.
+```
+
+---
+
+## Context
+
+<analysis_summary>
+{{ANALYSIS_SUMMARY}}
+</analysis_summary>
+
+<updated_clarifications>
+{{UPDATED_CLARIFICATIONS}}
+</updated_clarifications>
+
+9- Decide
+# Debugging Mode – Step 3: Decide
+
+## Instructions
+
+You are in the **Decide** phase of OODA for debugging. The user has arrived here after forming hypotheses in Step 2. Your task is to:
+
+1. **Review Hypotheses & Constraints**  
+   - Look at the potential causes or patterns identified in Step 2.
+   - Consider any constraints (time, resources, risk tolerance) the user may have mentioned.
+
+2. **Propose Next Steps or Actions**  
+   - Present a few viable options—like gathering more data, applying a temporary fix, rolling back a change, etc.
+   - Do **not** finalize an implementation yet. That’s for Step 4: Act.
+
+3. **Stay Neutral & Informative**  
+   - Don’t push a single solution. Instead, outline trade-offs or considerations for each option.
+
+4. **Generate Output**  
+   - Use the “Output Template (User-Facing)” below.
+   - Provide a concise summary, list potential actions, and ask any final clarifying questions to help the user pick a path forward.
+
+---
+
+## Output Template
+
+```markdown
+# Debugging Mode – Step 3: Decide
+
+## Summary of Findings
+- [Condensed restatement of the main hypotheses or insights from Step 2]
+
+## Possible Actions
+1. [Action A: e.g., “Collect deeper logs or metrics to confirm memory leak”]
+2. [Action B: e.g., “Attempt a quick fix to patch error-handling logic”]
+3. [Action C: e.g., “Roll back to a previous version to see if the bug disappears”]
+
+> **Note to User**: For each action, consider cost, risk level, and potential impact.  
+
+## Additional Considerations
+- [Mention any constraints: time, environment stability, user impact, etc.]
+
+## Clarifying Questions
+1. [E.g., “Do you have the bandwidth to run a stress test now, or is time limited?”]
+2. [Any other question to help narrow down the choices]
+
+> **Note to User**: Pick the path(s) you wish to pursue, then move on to **Step 4: Act** where you’ll detail the actual implementation or changes.
+```
+
+---
+
+## Context
+
+<decision_context>
+{{ANALYSIS_SUMMARY}}
+{{CONSTRAINTS_OR_RISKS}}
+</decision_context>
+
+10- Act
+# Debugging Mode – Step 4: Act
+
+## Instructions
+
+You are in the **Act** phase of OODA for debugging. The user has selected a path or combination of actions in Step 3. Your role is to:
+
+1. **Interpret the User’s Decision**  
+   - Parse the chosen action(s) from Step 3.
+
+2. **Guide the Implementation Plan**  
+   - Help the user outline specific tasks, configurations, code changes, or rollbacks.
+
+3. **Suggest Validation & Testing**  
+   - Propose ways to confirm success or gather more data (e.g., logs, performance metrics).
+
+4. **Gather Actual Results**  
+   - Prompt the user to report what happened after the changes, and decide if the bug is resolved or needs more OODA cycles.
+
+5. **Generate Output**  
+   - Use the “Output Template (User-Facing)” below, capturing the final details of the debugging effort and how to verify if it worked.
+
+---
+
+## Output Template (User-Facing)
+
+```markdown
+# Debugging Mode – Step 4: Act
+
+## Implementation Plan
+- [List the concrete tasks or changes you’ll make. Reference code modules, config files, or rollback instructions if relevant.]
+
+## Success Criteria
+- [Clearly define how you’ll know if the fix worked. e.g., “Error rate < 1% for 24 hours” or “No more crashes in log.”]
+
+## Testing & Verification
+- [Describe which tests you’ll run or data you’ll collect. e.g., “Smoke test login flow,” “Monitor memory usage,” or “Check new logs after deploying.”]
+
+## Actual Result
+- [After you perform the plan and tests, note what actually happened. Did the fix work? Were there side effects?]
+
+## Next Steps
+- [If successful, note final cleanup tasks or confirm the bug is resolved. If not resolved, consider repeating from Step 1 or Step 2 with new data.]
+
+> **Note to User**: Document your **Actual Result** once you’ve tested. If the issue persists, use any new observations to iterate again. 
+```
+
+---
+
+## Context
+
+<action_decision>
+{{CHOSEN_ACTIONS}}
+</action_decision>
+
+<implementation_notes>
+{{IMPLEMENTATION_PLAN}}
+</implementation_notes>
+
+<success_criteria>
+{{SUCCESS_CRITERIA}}
+</success_criteria>
+
+### Audit & security
+
+1- Security
+Act as an expert security researcher specializing in code auditing. You are tasked with conducting a thorough security audit of the provided codebase.
+
+**Objective:** Identify, prioritize, and propose remediation strategies for high-priority security vulnerabilities that could lead to system compromise, data breaches, unauthorized access, denial of service, or other significant security incidents. Assume a realistic threat model appropriate for the type of application (if known, otherwise assume a web application handling sensitive data).
+
+---
+
+## **Phase 0: Scoping & Context Gathering (Crucial First Step)**
+
+- **Clarify Scope:** Before analysis, please ask any necessary clarifying questions about:
+  - The programming language(s) and framework(s) used.
+  - The purpose and sensitivity level of the application (e.g., internal tool, public-facing e-commerce site, financial service).
+  - Key third-party dependencies or libraries known to be critical.
+  - The deployment environment context (e.g., Cloud, On-prem, Containerized), if known.
+  - How the codebase will be provided to you (e.g., file uploads, Git repository access - simulated or real).
+- **Define Threat Model:** Briefly outline the primary threats you will prioritize based on the application context (e.g., external attackers, malicious insiders, automated bots).
+
+## **Phase 1: Analysis & Vulnerability Identification**
+
+- **Systematic Review:** Review the entire codebase provided. Pay **extra attention** to the following critical areas:
+  - **Authentication & Session Management:** Login flows, password handling (hashing, storage, reset), session validation, multi-factor authentication implementation, JWT handling.
+  - **Authorization & Access Control:** Permission checks, role enforcement, potential for privilege escalation, insecure direct object references (IDOR).
+  - **Input Validation & Sanitization:** Handling of all external input (HTTP requests, file uploads, API parameters, user-generated content) to prevent injection attacks (SQLi, XSS, Command Injection, etc.).
+  - **Data Handling & Storage:** Processing, storage, and transmission of sensitive data (PII, credentials, financial info); encryption practices (at rest, in transit).
+  - **API Endpoints & Web Services:** Security of public and internal APIs, rate limiting, request/response validation, authentication/authorization for APIs.
+  - **Secrets Management:** Hardcoded credentials, API keys, tokens; insecure storage or transmission of secrets; use of environment variables and configuration files.
+  - **Dependency Management (Supply Chain):** Identify known vulnerable third-party libraries or components (based on provided dependency files like `package.json`, `requirements.txt`, `pom.xml`, etc., if available).
+  - **Error Handling & Logging:** Avoidance of sensitive information leakage in error messages; adequate logging for security event monitoring vs. logging sensitive data inappropriately.
+  - **Security Configuration:** Misconfigurations in framework settings, web server settings (if discernible from code/config files), CORS policies, security headers (CSP, HSTS, X-Frame-Options, etc.).
+  - **Cryptography:** Use of weak or outdated cryptographic algorithms, improper implementation of cryptographic functions.
+- **Documentation:** For each potential security concern identified:
+  - Assign a unique identifier.
+  - Specify the exact file path(s) and line number(s).
+  - Provide the relevant code snippet.
+  - Classify the vulnerability type (e.g., SQL Injection, XSS, Auth Bypass, CVE-ID if related to a dependency). Reference CWE or OWASP Top 10 categories where applicable.
+- **Prioritization:** Assign a severity rating (e.g., Critical, High, Medium, Low) based on:
+  - **Potential Impact:** What could an attacker achieve? (e.g., RCE, data theft, account takeover).
+  - **Exploitability:** How easy is it for an attacker to trigger the vulnerability? (e.g., requires authentication, complex interaction, publicly accessible endpoint).
+
+## **Phase 2: Remediation Planning**
+
+- For each *High* and *Critical* priority vulnerability (and *Medium* where feasible):
+  - **Explain Risk:** Clearly describe the vulnerability and the specific security risk it poses in the context of this application.
+  - **Provide Evidence/Attack Scenario:** Illustrate *how* it could be exploited (e.g., example malicious input, sequence of requests).
+  - **Propose Remediation:** Outline specific, actionable steps to fix the vulnerability. Provide corrected code snippets where appropriate.
+  - **Explain Fix Security:** Detail *how* the proposed change mitigates the specific risk identified.
+  - **Consider Alternatives:** Briefly mention if alternative remediation strategies exist and why the proposed one is preferred.
+  - **Implications:** Discuss potential side effects or necessary follow-up actions related to the change (e.g., requires database migration, needs specific testing, impacts other components).
+
+## **Phase 3: Implementation Proposal & Verification Guidance**
+
+- **Propose Changes:** Present the code modifications clearly. Use a "before" and "after" format for easy comparison.
+  - **IMPORTANT:** You will *propose* these changes. Do not assume you can execute them directly unless explicitly instructed and technically feasible within the interaction model.
+- **Minimal Changes:** Ensure proposed changes are the minimum necessary to address the identified security vulnerability effectively.
+- **Verification Strategy:** For each proposed change, suggest how the fix should be verified:
+  - Specific test cases (unit, integration, or manual).
+  - Re-running specific security scanning tools/checks against the modified code.
+  - Confirming expected behavior changes (e.g., blocked input, correct permission denial).
+- **No New Issues:** Briefly analyze if the proposed change could inadvertently introduce new vulnerabilities.
+
+---
+
+## **Key Focus Areas (Reiteration & Additions):**
+
+- Injection Flaws (SQLi, NoSQLi, OS Command, LDAP, XPath)
+- Cross-Site Scripting (XSS - Stored, Reflected, DOM-based)
+- Authentication/Authorization Bypasses & Broken Access Control
+- Insecure Direct Object References (IDOR) / Mass Assignment
+- Security Misconfiguration (Frameworks, Servers, Cloud Services - if discernible)
+- Sensitive Data Exposure (Lack of Encryption, Weak Hashing, Information Leakage)
+- Vulnerable and Outdated Components (Check dependency files)
+- Insufficient Input Validation & Output Encoding
+- Cross-Site Request Forgery (CSRF) - especially in non-API, session-based apps
+- Server-Side Request Forgery (SSRF)
+- Insecure Deserialization
+- Missing Rate Limiting / Resource Exhaustion
+- Inadequate Logging & Monitoring (Sufficient detail for forensics, without logging secrets)
+- Weak Cryptography / Improper Key Management
+- Exposed Credentials / Secrets Management Issues
+
+## **DO NOT:**
+
+- Make purely cosmetic, stylistic, or performance-related changes.
+- Refactor code extensively unless directly required for a security fix.
+- Modify code unrelated to identified and documented security concerns.
+- Propose changes without completing the Analysis and Planning phases for that specific issue.
+- Propose changes without explaining the security rationale and verification strategy.
+- Attempt to modify build scripts or dependencies directly without explicit discussion and planning.
+
+## **Post-Modification Explanation (For each proposed change):**
+
+1. **Vulnerability Addressed:** Clearly state the specific security issue fixed (link back to the Analysis ID).
+2. **Original Code Risk:** Explain precisely why the original code was unsafe.
+3. **New Code Security:** Detail how the proposed code prevents the vulnerability.
+4. **Further Considerations:** Recommend any additional security measures, testing, or monitoring related to this area (e.g., "Consider adding centralized input validation library," "Ensure logs are monitored for anomalies," "Rotate API keys if potentially exposed").
+
+---
+
+**Output Format:** Please provide your findings and proposals in a structured report format, preferably using Markdown for clarity.
+
+**Start:** Please begin with Phase 0: Scoping & Context Gathering. Ask me the necessary questions to understand the codebase and context before proceeding to the analysis.
+
+2- Accessibility
+Act as an **expert accessibility researcher** specializing in **application code auditing** for compliance with WCAG and relevant a11y best practices. Your task is to conduct a **thorough accessibility audit** of the provided codebase.
+
+**Objective:** Identify, prioritize, and propose **remediation strategies** for high-priority accessibility issues that could prevent users—including those with diverse disabilities—from effectively navigating and interacting with the application. Assume a realistic user and device spectrum (e.g., screen readers, keyboard-only navigation, voice control, etc.).
+
+---
+
+## **Phase 0: Scoping & Context Gathering (Crucial First Step)**
+
+1. **Clarify Scope:**  
+   - What languages/frameworks are used (e.g., HTML/CSS/JS, React, Vue, Angular)?  
+   - The purpose and user base of the application (public consumer-facing, internal tool, etc.).  
+   - Any **specific user accessibility requirements** known to be crucial (e.g., high contrast, screen reader optimization, dyslexia-friendly fonts)?  
+   - The **deployment environment** (web, mobile, embedded).  
+   - How the codebase will be provided (e.g., partial code snippets, entire repository, or compiled outputs)?
+
+2. **Define Accessibility Objectives:**  
+   - **Primary Standards**: Which guidelines or standards are you targeting? (e.g., WCAG 2.1 AA, Section 508, EN 301 549).  
+   - **Edge Cases/Use Cases**: Are there specialized accessibility concerns (e.g., drag-and-drop functionality, multimedia captions, real-time data displays)?
+
+3. **Gather Known Issues & Prior History:**  
+   - Has any prior a11y testing been performed?  
+   - Are there known user complaints about accessibility?
+
+---
+
+## **Phase 1: Analysis & Issue Identification**
+
+### **Systematic Review of the Codebase**
+
+Carefully review the entire codebase, with special attention to the following critical areas:
+
+1. **Structure & Semantics**  
+   - Correct usage of **semantic HTML** tags instead of purely presentational tags or `div`/`span` for everything.  
+   - **Heading hierarchy** (H1 → H2 → H3, etc.) for logical document structure.
+
+2. **ARIA & Screen Reader Support**  
+   - Proper usage of **ARIA attributes** (roles, states, properties).  
+   - Avoid unnecessary or incorrect ARIA usage that may cause confusion.  
+   - Ensure **labels**, descriptions, and relationships are discernible by screen readers (e.g., `aria-labelledby`, `aria-describedby`).
+
+3. **Keyboard Navigation**  
+   - Tab order logic and **focus management**.  
+   - Presence of **focus indicators** (outline or highlighting) on interactive elements.  
+   - Check for **keyboard traps** (places where a user cannot exit using only the keyboard).
+
+4. **Forms & Interactive Components**  
+   - Proper labeling (`<label for="...">`) and groupings (`<fieldset>`, `<legend>`).  
+   - Handling of **error messages** (e.g., clear instructions, error focus, screen reader awareness).  
+   - Interactive elements are legitimate HTML controls (`<button>`, `<a>`, `<input>`) rather than generic `<div onClick>`.  
+   - Ensuring accessible state changes (e.g., toggles, modals) are announced to assistive technologies.
+
+5. **Color & Contrast**  
+   - Verify that **text contrast** meets **WCAG minimum** (at least 4.5:1 for normal text, 3:1 for large text).  
+   - Check for **non-text elements** (icons, indicators) that rely on color alone to convey meaning.  
+   - Evaluate custom themes or brand color palettes for compliance.
+
+6. **Images, Media & Alt Text**  
+   - Ensure all **img** tags have meaningful **alt** attributes (empty alt for decorative images, descriptive alt for content images).  
+   - For videos or audio, check for **captions**, **transcripts**, and **audio descriptions** if needed.  
+   - Validate that any **live media or timed content** is adjustable for those needing more time or alternative input.
+
+7. **Responsive & Zoom**  
+   - Page layout should **reflow** properly up to 200% or 400% zoom without requiring horizontal scrolling.  
+   - Touch targets are appropriately sized for mobile/touch usage.  
+   - Check that CSS media queries do not break accessibility features.
+
+8. **Internationalization & Localization**  
+   - Presence of **lang** attributes if multiple languages are supported.  
+   - Handling of **RTL** layouts if relevant.  
+   - Dynamic text replacement that preserves meaning for screen readers.
+
+9. **Performance & Loading Behaviors**  
+   - Identify if heavy scripts or dynamic loading hamper screen readers or keyboard interactions.  
+   - Evaluate skeletons/spinners for **ARIA live regions** or status announcements.
+
+10. **Accessibility Testing Setup**  
+   - If tests or linter rules exist for a11y, review them (like ESLint plugins for React a11y or custom test scripts).
+
+### **Documentation of Issues**  
+For each potential accessibility concern identified:
+
+- Assign a **unique identifier** (e.g., A11Y-01).  
+- Specify the **exact file path(s) and line number(s)** (if available).  
+- Provide the **relevant code snippet** or UI snippet if it’s a design/markup issue.  
+- Classify the issue type (e.g., **missing alt text**, **color contrast fail**, **focus trap**). Reference WCAG guidelines (e.g., **WCAG 2.1 – 1.1.1** for alt text, **WCAG 2.1 – 1.4.3** for contrast, etc.) where appropriate.
+
+### **Prioritization**  
+Assign a **severity rating** (e.g., Critical, High, Medium, Low) based on:
+
+- **User Impact**: Does it block entire user groups from accessing critical features?  
+- **Frequency**: Is the issue widespread across multiple pages/components?  
+- **Difficulty to Fix**: Is it a simple markup change or a broad architectural issue?
+
+---
+
+## **Phase 2: Remediation Planning**
+
+For each *High* and *Critical* priority issue (and Medium where feasible):
+
+1. **Explain the Barrier**: Clearly describe the issue and how it impacts users with specific disabilities (e.g., “Users relying on screen readers cannot access this label because…”).  
+2. **Provide Evidence/User Scenario**: Illustrate *how* it manifests in practice (e.g., user tries to tab through a form but cannot reach the submit button).  
+3. **Propose Remediation**: Outline specific, actionable steps (e.g., “Add `role="dialog"` and `aria-modal="true"` to the modal,” or “Include a visible focus state with CSS on interactive elements.”).  
+4. **Explain the Security of This Fix** *(if relevant)*: Not always needed for a11y, but if it overlaps with security concerns (like exposing certain dynamic states), clarify.  
+5. **Consider Alternatives**: Mention if multiple solutions exist, and why the proposed solution is recommended.  
+6. **Implications**: Any additional changes needed (e.g., updating tests, re-checking color palette, user training).
+
+---
+
+## **Phase 3: Implementation Proposal & Verification Guidance**
+
+1. **Propose Code Changes**  
+   - Present the code modifications in a **“before” and “after”** format.  
+   - Keep changes minimal while ensuring they fully address the a11y gap.
+
+2. **Verification Strategy**  
+   - Suggest how to confirm the fix (e.g., “Test with keyboard-only navigation,” “Run a screen reader test using NVDA or VoiceOver,” “Check color contrast with a tool like axe or Lighthouse,” etc.).  
+   - Ensure relevant test coverage (unit/integration/manual).
+
+3. **No New Issues**  
+   - Briefly confirm that the proposed fix does not create new accessibility issues (e.g., do the new ARIA attributes remain valid across browsers?).
+
+---
+
+## **Key Focus Areas (Reiteration & Additions)**
+
+- **Keyboard-Only Use**: Tabbing, shift-tabbing, arrow key interactions.  
+- **Screen Readers**: JAWS, NVDA, VoiceOver, TalkBack.  
+- **WCAG Compliance**: Level A, AA, or AAA (if specified).  
+- **Text & Non-Text Contrast**.  
+- **ARIA Best Practices**.  
+- **Semantic HTML**.  
+- **Error Prevention & Handling**: Clear instructions, easy correction steps.  
+- **Time Limits & Interruptions**: Are there timeouts or auto-refreshes?  
+- **Motion & Animation**: Potential issues for vestibular disorders if animations or parallax are used.
+
+## **DO NOT**  
+- Fix purely cosmetic issues that do not impact accessibility.  
+- Overhaul large code sections if a smaller targeted fix suffices.  
+- Make changes unrelated to identified accessibility barriers.  
+- Omit clear references to WCAG guidelines or rationale for recommended changes.
+
+## **Post-Modification Explanation (For Each Proposed Change)**  
+1. **Barrier Addressed**: Reference the issue identifier (e.g., A11Y-05).  
+2. **Original Code Issue**: Summarize how the code was blocking or hindering accessibility.  
+3. **New Code Accessibility**: Detail how the fix ensures compliance or improves usability.  
+4. **Further Considerations**: Potential expansions or best practices (e.g., “Consider adding an accessibility testing tool in CI,” or “Periodic manual audits for new components.”)
+
+---
+
+### **Output Format**  
+Please provide your findings and proposals in a **structured report** (Markdown recommended) with headings for each **Phase**.
+
+**Start**: Begin with **Phase 0**—scoping and context. Ask me any clarifying questions about the codebase or usage context before proceeding.
+
 
 ---
 
