@@ -876,6 +876,9 @@ Would you like for me to check any other code example?
 
 ### Design System Prompt
 
+Prompt for UX/product design ideation:
+really think. Really think hard. I want you to come up with something that feels like Jony Ive designed it while on acid.
+
 I need you to describe, in detail, the styling and branding on this UI. We want to apply this styling to another one of our apps — but the engineer who will be implementing this design cannot see — so I need you to write a super-well-defined stylesheet/spec that explains exactly how to make something look like this.
 
 Focus entirely on the styles — colors, fonts, spacing, feel, overlaps etc. Ignore the content entirely. More just the 'vibes'. The app we're working on is entirely different, so don't be like "the sidebar should be x pixels wide" — instead, focus on the higher-level styling!
