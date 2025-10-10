@@ -1971,6 +1971,51 @@ You are in the **Act** phase of OODA for debugging. The user has selected a path
 
 ### Audit & security
 
+1/ Rate limiting that actually works
+Don't just limit by IP address. Limit by user ID too.
+Why? One user can abuse your API from multiple devices. One IP can have multiple legitimate users.
+Combine both for real protection.
+2/ Never use default database ports
+PostgreSQL default: 5432
+Your port: Literally anything else
+Attackers scan default ports first. Make them work harder. Change MySQL from 3306, Redis from 6379, MongoDB from 27017.
+Simple but effective.
+3/ Input validation beyond format checking
+Don't just check if email looks like an email.
+Check if the age makes business sense (13-120).
+Check if the role is actually allowed.
+Validate data against your business rules, not just data types.
+4/ Secure session management
+30-minute session timeout (not 24 hours).
+HttpOnly cookies (JavaScript can't steal them).
+HTTPS only in production.
+SameSite strict to prevent CSRF.
+Most breaches happen through stolen sessions.
+5/ API versioning for security
+Keep old insecure endpoints alive while you migrate users.
+Add deprecation warnings to old versions.
+Force migration with incentives, not breaking changes.
+Sudden API changes = angry customers + security holes.
+6/ Log security events, not just errors
+Failed login attempts.
+Unusual API usage patterns.
+Slow database queries.
+Multiple requests from same IP.
+Logs = your early warning system.
+7/ Database query monitoring
+Set query timeout limits.
+Monitor expensive operations.
+Log queries that take longer than 1 second.
+Alert on suspicious query patterns.
+Slow queries often indicate attacks or bad actors.
+8/ Error handling that protects you
+Production errors should be generic: "Internal server error."
+Development errors can be detailed.
+Never expose stack traces to users.
+Always log the real error internally.
+Error messages leak sensitive information.
+
+
 1- Security
 Act as an expert security researcher specializing in code auditing. You are tasked with conducting a thorough security audit of the provided codebase.
 
