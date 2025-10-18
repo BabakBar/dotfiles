@@ -1,0 +1,241 @@
+{
+  "security.workspace.trust.untrustedFiles": "prompt",
+
+  // Editor UX
+  "editor.wordWrap": "on",
+  "editor.linkedEditing": true,
+  "editor.inlayHints.enabled": "on",
+  "editor.stickyScroll.enabled": true,
+  "editor.smoothScrolling": true,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.minimap.showSlider": "mouseover",
+  "workbench.editor.empty.hint": "hidden",
+  "files.defaultLanguage": "${activeEditorLanguage}",
+
+  // Diff ergonomics
+  "diffEditor.experimental.showMoves": true,
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+
+  // Inline assist
+  "editor.inlineSuggest.enabled": true,
+
+  // Git and Conventional Commits
+  "git.enableSmartCommit": true,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.inputValidation": "error",
+  "git.inputValidationSubjectPattern": "^((build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([\\w\\-.]+\\))?!?: )?[\\x20-\\x7E]+$",
+  "git.inputValidationSubjectLength": 72,
+
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false,
+    "yaml": true,
+    "sql": true,
+    "go": true
+  },
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "github.copilot.chat.codesearch.enabled": true,
+  "github.copilot.chat.edits.codesearch.enabled": true,
+  "github.copilot.chat.editor.temporalContext.enabled": true,
+  "github.copilot.chat.edits.temporalContext.enabled": true,
+  "github.copilot.chat.agent.thinkingTool": true,
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    { "text": "Use Conventional Commits. No emojis. Subject in imperative mood, max 72 chars." },
+    { "text": "Format: <type>(<optional scope>)<optional !>: <subject>. Blank line. Optional wrapped body." },
+    { "text": "Allowed types: build,chore,ci,docs,feat,fix,perf,refactor,revert,style,test." }
+  ],
+
+  // Agent mode + MCP
+  "chat.agent.enabled": true,
+  "chat.agent.maxRequests": 300,
+  "github.copilot.chat.agent.runTasks": true,
+  "github.copilot.chat.agent.autoFix": true,
+  "chat.mcp.discovery.enabled": true,
+
+  // Terminals (no Anaconda PATH injection)
+  "terminal.integrated.inheritEnv": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "auto",
+  "terminal.integrated.enablePersistentSessions": true,
+  "terminal.integrated.shellIntegration.enabled": true,
+
+  // experimentals
+  "editor.experimentalGpuAcceleration": "on",
+  "editor.experimentalEditContextEnabled": true,
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+
+  // Windows terminal profiles (PowerShell, cmd, WSL, Git Bash)
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": { "source": "PowerShell", "icon": "terminal-powershell" },
+    "Command Prompt": {
+      "path": [ "${env:windir}\\\\Sysnative\\\\cmd.exe", "${env:windir}\\\\System32\\\\cmd.exe" ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": { "source": "Git Bash" },
+    "Ubuntu (WSL)": {
+      "path": "C:\\\\Windows\\\\System32\\\\wsl.exe",
+      "args": [ "-d", "Ubuntu" ]
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+
+  // macOS terminal profiles
+  "terminal.integrated.profiles.osx": {
+    "zsh": { "path": "/bin/zsh", "icon": "terminal" },
+    "bash": { "path": "/bin/bash" }
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.env.osx": {
+    "PATH": "/opt/homebrew/bin:${env:PATH}"
+  },
+
+  // Safe terminal auto-approve for modern CLI toolbox
+  "chat.tools.terminal.autoApprove": {
+    "rg": true,
+    "fd": true,
+    "bat": true,
+    "jq": true,
+    "yq": true,
+    "fzf": true,
+    "sd": true,
+    "xsv": true,
+    "mlr": true,
+    "http": true,
+    "winget": true,
+    "eza": true,
+    "zoxide": true,
+    "broot": true,
+    "delta": true,
+    "duf": true,
+    "dust": true,
+    "btm": true
+  },
+
+  // Python (uv + Ruff; Jupyter)
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll": "explicit",
+      "source.organizeImports": "explicit"
+    }
+  },
+  "python.analysis.typeCheckingMode": "standard",
+  "python.terminal.activateEnvironment": true,
+  "python.envFile": "${workspaceFolder}/.env",
+  "jupyter.interactiveWindow.textEditor.executeSelection": true,
+
+  // Terraform
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": true
+  },
+  "terraform.languageServer.enable": true,
+
+  // YAML
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+  "yaml.schemaStore.enable": true,
+
+  // JS/TS/JSON
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[javascriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescriptreact]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[json]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "javascript.inlayHints.parameterNames.enabled": "all",
+  "typescript.inlayHints.parameterNames.enabled": "all",
+  "typescript.preferences.preferTypeOnlyAutoImports": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+
+  // Go
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.codeActionsOnSave": { "source.organizeImports": "always" },
+    "editor.formatOnSave": true
+  },
+  "go.toolsManagement.autoUpdate": true,
+
+  // Dockerfile
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker",
+    "editor.formatOnSave": true
+  },
+
+  // File associations (cloud-centric)
+  "files.associations": {
+    "*.yaml": "yaml",
+    "*.yml": "yaml",
+    "Dockerfile*": "dockerfile",
+    "Containerfile": "dockerfile",
+    "*.tfvars": "terraform",
+    "*.hcl": "terraform",
+    ".dockerignore": "dockerignore"
+  },
+
+  // Kubernetes (extension)
+  "vs-kubernetes.kubeconfig": "${env:HOME}/.kube/config",
+
+  // Remote SSH
+  "remote.SSH.remotePlatform": {
+    "my-azure-vm": "linux",
+    "my-lab-node": "linux"
+  },
+  "remote.SSH.showLoginTerminal": true,
+
+  // Search/watcher excludes for performance
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true,
+    "**/coverage": true,
+    "**/.terraform": true,
+    "**/.venv": true,
+    "**/venv": true,
+    "**/__pycache__": true
+  },
+  "files.watcherExclude": {
+    "**/node_modules/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/dist/**": true,
+    "**/.terraform/**": true,
+    "**/.venv/**": true,
+    "**/venv/**": true,
+    "**/__pycache__/**": true
+  },
+
+  // UI / Icons / Theme
+  "workbench.iconTheme": "vscode-icons",
+  "workbench.colorTheme": "Halcyon",
+
+  // GitLens
+  "gitlens.codeLens.enabled": false,
+  "gitlens.hovers.enabled": false,
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+
+  // Repo indexing for chat
+  "githubRepositories.indexing.cacheSizeLimit": 5000,
+  "githubRepositories.indexing.cacheRepoLimit": 70,
+
+  // Docker/Azure UX
+  "docker.extension.enableComposeLanguageServer": false,
+  "docker.extension.dockerEngineAvailabilityPrompt": false,
+
+  // Accessibility
+  "editor.accessibilitySupport": "on",
+  "accessibility.signalOptions.volume": 0,
+
+  // Misc
+  "makefile.configureOnOpen": true,
+  "workbench.settings.applyToAllProfiles": [],
+  "window.zoomPerWindow": false
+}
