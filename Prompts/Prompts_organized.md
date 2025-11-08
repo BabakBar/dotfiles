@@ -124,6 +124,34 @@ Avoid parallel processing only when tasks depend on each other's outputs.
 3. Include code examples and practical scenarios
 4. Provide validation points for understanding
 
+#### Solving any Problem
+FOUR-STEP METHOD
+- Understand the problem by identifying what is unknown, what is given, and what conditions exist
+- Devise a plan by looking for patterns, drawing analogies, or breaking problems into smaller parts
+- Carry out the plan systematically while checking each step for correctness
+- Look back to examine the solution, verify it works, and consider alternative approaches
+
+HEURISTIC TECHNIQUES
+- Use analogy to find similar problems you've solved before and apply those patterns
+- Work backwards from the desired solution to find a path forward
+- Decompose complex problems into simpler, more manageable sub-problems
+- Generalize or specialize the problem to make it more accessible
+- Draw diagrams and use visual aids to clarify abstract concepts
+
+QUESTIONING STRATEGIES
+- Ask "What am I trying to find?" to clarify the unknown elements
+- Ask "What data do I have?" to inventory available information
+- Ask "Have I seen this before?" to draw on past experience
+- Ask "Can I solve a related simpler problem first?" when stuck
+- Ask "How can I check if this is correct?" to verify solutions
+
+PRACTICAL APPLICATIONS
+- Strip away irrelevant details to focus on the problem's core
+- Use auxiliary elements like constructions or intermediate goals
+- Apply mathematical reasoning to non-mathematical problems
+- Document your thinking process to track progress and learn from mistakes
+- Practice problem-solving as a learnable skill that improves over time
+
 ### 6. Advanced Techniques
 
 #### TODO Tool Implementation
